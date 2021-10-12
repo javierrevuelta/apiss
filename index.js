@@ -1,5 +1,5 @@
+const { application } = require('express');
 const express = require('express');
-const mongoose = require('mongoose');
 const routes = require('./routes');
 const cors = require('cors');
 const conectarDB = require('./config/db');
@@ -37,13 +37,13 @@ mongoose.connect('mongodb://localhost/apiss', {
 //Puerto de la app
 const PORT = process.env.PORT || 7000;
 
-//Habilitar Body-parser
-app.use(express.json());
+//Habilitar express.json
+app.use(express.json({extended:true}));
 app.use(express.urlencoded({ extended: true }));
 
 //Router
-app.use('/',routes())
+app.use('/',routes());
 
-app.listen(PORT,()=>{
+app.listen(PORT, () => {
     console.log('Servidor funcionando')
 })
